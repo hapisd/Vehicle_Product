@@ -1,0 +1,505 @@
+<odoo>
+  <data>
+
+    <!-- brand view -->
+
+    <record model="ir.ui.view" id="vehicle_brand_view_tree">
+      <field name="name">vehicle.brand.tree</field>
+      <field name="model">vehicle.brand</field>
+      <field name="arch" type="xml">
+        <tree string="Brand List">
+          <field name="ref"/>
+          <field name="name"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_brand_view_form" >
+      <field name="name">vehicle.brand.form</field>
+      <field name="model">vehicle.brand</field>
+      <field name="arch" type="xml">
+        <form string="Brand Form">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="ref"/>
+              </h1>
+            </div>
+            <group>
+              <field name="name"/>
+              <field name="image" widget="image" class="oe_avatar" style="position: relative"/>
+              <field name="description"/>
+            </group>
+            <notebook>
+              <page string="Type">
+                <group>
+                  <field name="type_line" mode="tree,kanban" nolabel="1">
+                    <tree string="Type Name" editable="top">
+                      <field name="name"/>
+                      <field name="image"/>
+                      <field name="brand_id"/>
+                      <field name="description"/>
+                    </tree>
+                    <form string='Type Name'>
+                      <group>
+                        <field name="name"/>
+                        <field name="image"/>
+                        <field name="brand_id"/>
+                        <field name="description"/>
+                      </group>
+                    </form>
+                  </field>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_brand_view_kanban" >
+      <field name="name">vehicle.brand.kanban</field>
+      <field name="model">vehicle.brand</field>
+      <field name="arch" type="xml">
+        <kanban string="Brand Kanban">
+          <field name="id"/>
+          <field name="image"/>
+          <field name="name"/>
+          <field name="description"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click">
+                <div class="o_kanban_image" style="position: relative">
+                  <img t-att-src="kanban_image('vehicle.brand', 'image', record.id.raw_value)" alt="Brand"/>
+                </div>
+                <div class="oe_kanban_details">
+                  <strong class="o_kanban_record_title">
+                    <field name="name"/>
+                    <field name="description"/>
+                  </strong>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- type view -->
+
+    <record model="ir.ui.view" id="vehicle_type_view_tree">
+      <field name="name">vehicle.type.tree</field>
+      <field name="model">vehicle.type</field>
+      <field name="arch" type="xml">
+        <tree string="Type List">
+          <field name="ref"/>
+          <field name="name"/>
+          <field name="brand_id"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_type_view_form" >
+      <field name="name">vehicle.type.form</field>
+      <field name="model">vehicle.type</field>
+      <field name="arch" type="xml">
+        <form string="Type Form">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="ref"/>
+              </h1>
+            </div>
+            <group>
+              <field name="brand_id"/>
+              <field name="name"/>
+              <field name="image" widget="image" class="oe_avatar" position="center"/>
+              <field name="description"/>
+            </group>
+            <notebook>
+              <page string="Model">
+                <group>
+                  <field name="model_line" mode="tree,kanban" nolabel="1">
+                    <tree string="Model Name" editable="top">
+                      <field name="name"/>
+                      <field name="description"/>
+                    </tree>
+                    <form string='Model Name'>
+                      <group>
+                        <field name="name"/>
+                        <field name="image"/>
+                        <field name="description"/>
+                      </group>
+                    </form>
+                  </field>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_type_view_kanban" >
+      <field name="name">vehicle.type.kanban</field>
+      <field name="model">vehicle.type</field>
+      <field name="arch" type="xml">
+        <kanban string="Type Kanban">
+          <field name="id"/>
+          <field name="image"/>
+          <field name="name"/>
+          <field name="description"/>
+          <templates>
+              <t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                  <div class="o_kanban_image">
+                    <img t-att-src="kanban_image('vehicle.type', 'image', record.id.raw_value)" alt="Type"/>
+                  </div>
+                  <div class="oe_kanban_details">
+                    <strong class="o_kanban_record_title">
+                      <field name="name"/>
+                    </strong>
+                    <ul>
+                      <li>
+                        <field name="description"/>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- model view -->
+
+    <record model="ir.ui.view" id="vehicle_model_view_tree">
+      <field name="name">vehicle.model.tree</field>
+      <field name="model">vehicle.model</field>
+      <field name="arch" type="xml">
+        <tree string="Model List">
+          <field name="ref"/>
+          <field name="name"/>
+          <field name="brand_id"/>
+          <field name="type_id"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_model_view_form" >
+      <field name="name">vehicle.model.form</field>
+      <field name="model">vehicle.model</field>
+      <field name="arch" type="xml">
+        <form string="Model Form">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="ref"/>
+              </h1>
+            </div>
+            <group>
+              <field name="brand_id"/>
+              <field name="type_id"/>
+              <field name="name"/>
+              <field name="image" widget="image" class="oe_avatar"/>
+              <field name="description"/>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_model_view_kanban" >
+      <field name="name">vehicle.model.kanban</field>
+      <field name="model">vehicle.model</field>
+      <field name="arch" type="xml">
+        <kanban string="Model Kanban">
+          <field name="id"/>
+          <field name="image"/>
+          <field name="name"/>
+          <field name="description"/>
+          <templates>
+              <t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                  <div class="o_kanban_image">
+                    <img t-att-src="kanban_image('vehicle.model', 'image', record.id.raw_value)" alt="Model"/>
+                  </div>
+                  <div class="oe_kanban_details">
+                    <strong class="o_kanban_record_title">
+                      <field name="name"/>
+                    </strong>
+                  </div>
+                </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- vehicle price view -->
+
+    <record model="ir.ui.view" id="vehicle_price_view_tree">
+      <field name="name">vehicle.price.tree</field>
+      <field name="model">vehicle.price</field>
+      <field name="arch" type="xml">
+        <tree string="Price List">
+          <field name="ref"/>
+          <field name="model_id"/>
+          <field name="year_id"/>
+          <field name="name"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_price_view_form" >
+      <field name="name">vehicle.price.form</field>
+      <field name="model">vehicle.price</field>
+      <field name="arch" type="xml">
+        <form string="Price List Form">
+          <sheet>
+            <div class="oe_title">
+              <h1>
+                <field name="ref"/>
+              </h1>
+            </div>
+            <group>
+              <field name="model_id"/>
+              <field name="year_id"/>
+              <field name="name"/>
+              <field name="description"/>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_price_view_kanban" >
+      <field name="name">vehicle.price.kanban</field>
+      <field name="model">vehicle.price</field>
+      <field name="arch" type="xml">
+        <kanban string="Price List Kanban">
+          <field name="id"/>
+          <field name="model_id"/>
+          <field name="year_id"/>
+          <field name="name"/>
+          <templates>
+              <t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                  <div class="oe_kanban_details">
+                    <strong class="o_kanban_record_title">
+                      <field name="model_id"/>
+                    </strong>
+                    <ul>
+                      <li>
+                        <field name="year_id"/>
+                      </li>
+                      <li>
+                        <field name="name"/>
+                      </li>
+                      <li>
+                        <field name="description"/>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- year view -->
+
+    <record model="ir.ui.view" id="vehicle_year_view_tree">
+      <field name="name">vehicle.year.tree</field>
+      <field name="model">vehicle.year</field>
+      <field name="arch" type="xml">
+        <tree string="Year List">
+          <field name="name"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_year_view_form" >
+      <field name="name">vehicle.year.form</field>
+      <field name="model">vehicle.year</field>
+      <field name="arch" type="xml">
+        <form string="Year Form">
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="description"/>
+            </group>
+          </sheet>
+          <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
+          </div>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vehicle_year_view_kanban" >
+      <field name="name">vehicle.year.kanban</field>
+      <field name="model">vehicle.year</field>
+      <field name="arch" type="xml">
+        <kanban string="Year Kanban">
+          <field name="id"/>
+          <field name="name"/>
+          <field name="description"/>
+          <templates>
+              <t t-name="kanban-box">
+                <div class="oe_kanban_global_click">
+                  <div class="oe_kanban_details">
+                    <strong class="o_kanban_record_title">
+                      <field name="name"/>
+                    </strong>
+                  </div>
+                </div>
+              </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <!-- search type view -->
+
+    <record id="view_vehicle_type_search" model="ir.ui.view">
+      <field name="name">vehicle.type.search</field>
+      <field name="model">vehicle.type</field>
+      <field name="arch" type="xml">
+        <search string="Search Type">
+          <field name="name"  filter_domain="['|',('name', 'ilike', self),('ref', 'ilike', self)]"/>
+          <field name="brand_id"/>
+          <group string="Group By">
+            <filter name="brand" string="Brand" context="{'group_by': 'brand_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <!-- search model view -->
+
+    <record id="vehicle_model_search_view" model="ir.ui.view">
+      <field name="name">vehicle.model.search</field>
+      <field name="model">vehicle.model</field>
+      <field name="arch" type="xml">
+        <search string="Search Model">
+          <field name="name"  filter_domain="['|',('name', 'ilike', self),('ref', 'ilike', self)]"/>
+          <field name="name"/>
+          <field name="type_id"/>
+          <group string="Group By">
+            <filter name="type" string="Type" context="{'group_by': 'type_id'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+    
+    <!-- brand actions -->
+
+    <record model="ir.actions.act_window" id="vehicle_brand_action">
+      <field name="name">Brand</field>
+      <field name="res_model">vehicle.brand</field>
+      <field name="view_mode">tree,form,kanban</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Add New Brand ~
+        </p>
+      </field>
+    </record>
+
+    <!-- type actions -->
+
+    <record model="ir.actions.act_window" id="vehicle_type_action">
+      <field name="name">Type</field>
+      <field name="res_model">vehicle.type</field>
+      <field name="view_mode">tree,form,kanban</field>
+      <field name="context">{'search_default_brand': 1}</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Add New Type ~
+        </p>
+      </field>
+    </record>
+    
+    <!-- model actions -->
+
+    <record model="ir.actions.act_window" id="vehicle_model_action">
+      <field name="name">Model</field>
+      <field name="res_model">vehicle.model</field>
+      <field name="view_mode">tree,form,kanban</field>
+      <field name="context">{'search_default_type': 1}</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Add New Model ~
+        </p>
+      </field>
+    </record>
+
+    <!-- price list actions -->
+
+    <record model="ir.actions.act_window" id="vehicle_price_action">
+      <field name="name">Price List</field>
+      <field name="res_model">vehicle.price</field>
+      <field name="view_mode">tree,form,kanban</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Add New Price ~
+        </p>
+      </field>
+    </record>
+
+    <!-- year actions -->
+
+    <record model="ir.actions.act_window" id="vehicle_year_action">
+      <field name="name">Year</field>
+      <field name="res_model">vehicle.year</field>
+      <field name="view_mode">tree,form,kanban</field>
+      <field name="help" type="html">
+        <p name="o_view_nocontent_smiling_face">
+            Add New Year ~
+        </p>
+      </field>
+    </record>
+
+    <!-- dashboard menu -->
+    <menuitem id="menu_dashboard_vehicle_product" name="Vehicle Product" web_icon="vehicle,static/description/icon.png"/>
+    
+    <!-- bar menu -->
+    <menuitem id="menu_bar_vehicle" name="Vehicle" parent="menu_dashboard_vehicle_product"/>
+    
+    <!-- item menu -->
+    <menuitem id="menu_item_brand" name="Brand" parent="menu_bar_vehicle" action="vehicle_brand_action"/>
+    <menuitem id="menu_item_type" name="Type" parent="menu_bar_vehicle" action="vehicle_type_action"/>
+    <menuitem id="menu_item_model" name="Model" parent="menu_bar_vehicle" action="vehicle_model_action"/>
+    <menuitem id="menu_item_year" name="Year" parent="menu_bar_vehicle" action="vehicle_year_action"/>
+    <menuitem id="menu_item_price_list" name="Price List" parent="menu_bar_vehicle" action="vehicle_price_action"/>
+
+  </data>
+</odoo>

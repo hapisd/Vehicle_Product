@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+brand_agent,brand.agent,model_vehicle_brand,group_vehicle_agent,1,0,0,0
+type_agent,type.agent,model_vehicle_type,group_vehicle_agent,1,0,0,0
+model_agent,model.agent,model_vehicle_model,group_vehicle_agent,1,0,0,0
+year_agent,year.agent,model_vehicle_year,group_vehicle_agent,1,0,0,0
+price_agent,price.agent,model_vehicle_price,group_vehicle_agent,1,0,0,0
+
+brand_admin,brand.admin,model_vehicle_brand,group_vehicle_admin,1,1,1,1
+type_admin,type.admin,model_vehicle_type,group_vehicle_admin,1,1,1,1
+model_admin,model.admin,model_vehicle_model,group_vehicle_admin,1,1,1,1
+year_admin,year.admin,model_vehicle_year,group_vehicle_admin,1,1,1,1
+price_admin,price.admin,model_vehicle_price,group_vehicle_admin,1,1,1,1
+
